@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
@@ -35,7 +36,8 @@ public class Autor implements Serializable{
 	
 	@Column(name="NACIONALIDAD")
 	private String nacionalidad;
-	@OneToMany(mappedBy = "autor",fetch = FetchType.LAZY )
+	@JsonIgnoreProperties("autor")
+	@OneToMany(mappedBy = "autor")
 	private List<Libro> libros;
 	
 	public Integer getIdAutor() {

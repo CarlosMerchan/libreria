@@ -16,6 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -35,8 +36,8 @@ public class Libro implements Serializable {
 	@Id
 	@Column(name = "ID_LIBRO")
 	private Integer idLibro;
-	@JsonIgnore
-	@ManyToOne( cascade = CascadeType.ALL,fetch  = FetchType.LAZY)
+	@JsonIgnoreProperties("libros")
+	@ManyToOne(cascade = {CascadeType.REFRESH,CascadeType.MERGE})
 	@JoinColumn(name = "ID_AUTOR")
 	private Autor autor;
 	@Column(name = "NOMBRE")

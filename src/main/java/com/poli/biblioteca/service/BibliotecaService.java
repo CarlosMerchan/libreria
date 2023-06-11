@@ -6,7 +6,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.management.RuntimeErrorException;import org.hibernate.annotations.NotFound;
+import javax.management.RuntimeErrorException;
+
+import org.apache.catalina.connector.Response;
+import org.hibernate.annotations.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,6 +51,10 @@ public class BibliotecaService {
 		}
 		return new ResponseEntity<>(listaLibros,HttpStatus.OK);
 	
+	}
+	
+	public ResponseEntity<?> listarAutores(){
+		return ResponseEntity.status(HttpStatus.OK).body(autoresDao.findAll());
 	}
 	
 		public ResponseEntity<String> registrarAutor(Autor autor){

@@ -36,6 +36,11 @@ public class BibliotecaController {
 		return bibliotecaService.getListaLibros();
 	}
 	
+	@GetMapping("/listarAutores")
+	public ResponseEntity<?> listarAutores(){
+		return bibliotecaService.listarAutores();
+	}
+	
 	@PostMapping("/registrarAutor")
 	public ResponseEntity<String> insertarAutor(@RequestBody Autor autor){
 		return bibliotecaService.registrarAutor(autor);
