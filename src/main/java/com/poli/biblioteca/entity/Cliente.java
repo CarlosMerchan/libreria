@@ -29,9 +29,8 @@ public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_CLIENTE")
-	private Integer idCliente;
+	@Column(name = "DOCUMENTO")
+	private Long documento;
 	@Column(name = "NOMBRES")
 	private String nombres;
 	@Column(name = "APELLIDOS")
@@ -40,94 +39,71 @@ public class Cliente implements Serializable {
 	private String mail;
 	@Column(name = "TELEFONO")
 	private Integer telefono;	
+	
 	@OneToMany(mappedBy = "idCliente", fetch = FetchType.LAZY  )
 	private List<PrestamoLibro> prestamos;
-
-	public Integer getIdCliente() {
-		return idCliente;
+	public Long getDocumento() {
+		return documento;
 	}
-
-	public void setIdCliente(Integer idCliente) {
-		this.idCliente = idCliente;
+	public void setDocumento(Long documento) {
+		this.documento = documento;
 	}
-
 	public String getNombres() {
 		return nombres;
 	}
-
 	public void setNombres(String nombres) {
 		this.nombres = nombres;
 	}
-
 	public String getApellidos() {
 		return apellidos;
 	}
-
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
-
 	public String getMail() {
 		return mail;
 	}
-
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-
 	public Integer getTelefono() {
 		return telefono;
 	}
-
 	public void setTelefono(Integer telefono) {
 		this.telefono = telefono;
 	}
-
 	public List<PrestamoLibro> getPrestamos() {
 		return prestamos;
 	}
-
 	public void setPrestamos(List<PrestamoLibro> prestamos) {
 		this.prestamos = prestamos;
 	}
-
-	public Cliente() {
-		super();
-	}
-
 	
-
-	public Cliente(String nombres, String apellidos, String mail, Integer telefono) {
+	
+	public Cliente(Long documento, String nombres, String apellidos, String mail, Integer telefono) {
 		super();
+		this.documento = documento;
 		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.mail = mail;
 		this.telefono = telefono;
 	}
-
+	
+	
+	public Cliente() {
+		super();
+	}
 	@Override
 	public String toString() {
-		return "Cliente [idCliente=" + idCliente + ", nombres=" + nombres + ", apellidos=" + apellidos + ", mail="
-				+ mail + ", telefono=" + telefono + "]";
+		return "Cliente [documento=" + documento + ", nombres=" + nombres + ", apellidos=" + apellidos + ", mail="
+				+ mail + ", telefono=" + telefono + ", prestamos=" + prestamos + "]";
 	}
+	
+	
+	
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(idCliente);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Cliente other = (Cliente) obj;
-		return Objects.equals(idCliente, other.idCliente);
-	}
-  
+	
+	
 	
 
 	

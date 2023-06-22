@@ -67,9 +67,9 @@ public class BibliotecaController {
 		return bibliotecaService.getLibro(idLibro);
 				
 	}
-	@PostMapping("/solicitarPrestamo/{idLibro}/{idCliente}")
-	public ResponseEntity<String> solicitarPrestamo(@PathVariable int idLibro,@PathVariable("idCliente") int idCliente){
-		return bibliotecaService.solicitarPrestamo(idLibro,idCliente);
+	@PostMapping("/solicitarPrestamo/{idLibro}/{documento}")
+	public ResponseEntity<String> solicitarPrestamo(@PathVariable int idLibro,@PathVariable("documento") Long documento){
+		return bibliotecaService.solicitarPrestamo(idLibro,documento);
 	}
 	
 	@GetMapping("/listarPrestamos")
@@ -83,7 +83,7 @@ public class BibliotecaController {
 	}
 	
 	@GetMapping("/listarPrestamoCliente/{idCliente}")
-	public ResponseEntity<List<PrestamoLibro>> prestamosCliente(@PathVariable int idCliente){
+	public ResponseEntity<List<PrestamoLibro>> prestamosCliente(@PathVariable Long idCliente){
 		return bibliotecaService.prestamosCliente(idCliente);
 	}
 	

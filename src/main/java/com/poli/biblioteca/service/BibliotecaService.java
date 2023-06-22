@@ -4,6 +4,8 @@ import java.security.InvalidAlgorithmParameterException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import javax.management.RuntimeErrorException;
@@ -20,6 +22,7 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.handler.HandlerExceptionResolverComposite;
 import org.xml.sax.ErrorHandler;
 
+import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
 import com.poli.biblioteca.dao.IAutoresDao;
 import com.poli.biblioteca.dao.IClienteDao;
 import com.poli.biblioteca.dao.ILibrosDao;
@@ -92,7 +95,7 @@ public class BibliotecaService {
 		
 	}
 		
-		public ResponseEntity<String> solicitarPrestamo(int idLibro,int idCliente){
+		public ResponseEntity<String> solicitarPrestamo(int idLibro,Long idCliente){
 			
 			try {
 				 PrestamoLibro prestamo = new PrestamoLibro();
@@ -123,10 +126,15 @@ public class BibliotecaService {
 		
 		public boolean autorizarPrestamo(Libro libro, Cliente cliente) {			
 			boolean autorizado = true;
+			if(cliente.getPrestamos() == null) {
+					cliente.setPrestamos(Collections.emptyList());
+			}
+			
 			if(cliente.getPrestamos().size() >= 5 || libro.getStock() == 0) {
 				autorizado = false;
 			}
-			libro.setStock(libro.getStock() - 1);			
+			libro.setStock(libro.getStock() - 1);
+					
 			return autorizado;
 		}
 
@@ -197,7 +205,7 @@ public class BibliotecaService {
 			}
 		}
 
-		public ResponseEntity<List<PrestamoLibro>> prestamosCliente(int idCliente) {
+		public ResponseEntity<List<PrestamoLibro>> prestamosCliente(long idCliente) {
 			Cliente cliente = clienteDao.findById(idCliente).orElse(null);
 			List<PrestamoLibro> prestamos = cliente.getPrestamos();
 			return new ResponseEntity<List<PrestamoLibro>>(prestamos,HttpStatus.OK);
