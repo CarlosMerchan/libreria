@@ -1,28 +1,21 @@
 package com.poli.biblioteca.service;
 
-import java.security.InvalidAlgorithmParameterException;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.Collections;
 import java.util.List;
 
-import javax.management.RuntimeErrorException;
 
-import org.apache.catalina.connector.Response;
-import org.hibernate.annotations.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.HandlerExceptionResolver;
-import org.springframework.web.servlet.handler.HandlerExceptionResolverComposite;
-import org.xml.sax.ErrorHandler;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
+
+
 import com.poli.biblioteca.dao.IAutoresDao;
 import com.poli.biblioteca.dao.IClienteDao;
 import com.poli.biblioteca.dao.ILibrosDao;

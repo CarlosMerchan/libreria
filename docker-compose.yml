@@ -1,32 +1,16 @@
 version: '3.9'
-services:      
-  java_db:
-    container_name: "java_db"
-    image: mysql:8.0.33
-    ports:
-      - 3307:3306
-    environment:
-      - MYSQL_ROOT_PASSWORD=Db152
-      - MYSQL_DATABASE=biblioteca
-      - MYSQL_USER=user
-      - MYSQL_PASSWORD=1234
-    volumes:
-      - java_db_data:/var/lib/mysql
-      
+services:
   biblioteca:
     build: .
     container_name: "biblioteca_app"
     image: "biblioteca_v1" 
     ports:
-      - 9090:9090
-    links:
-      - java_db
+      - 9090:9090    
     environment:
-      - DATABASE_URL=jdbc:mysql://java_db:3306/biblioteca?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-      - DATABASE_USERNAME=user
-      - DATABASE_PASSWORD=1234
-    depends_on:
-      - java_db
+      - DATABASE_URL=jdbc:sqlserver://integracionbook.database.windows.net:1433;database=biblioteca;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+      - DATABASE_USERNAME=desarrolladorbook
+      - DATABASE_PASSWORD=Book12345
+    
       
 volumes:
   java_db_data:
