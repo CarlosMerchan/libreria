@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,6 +45,11 @@ public class BibliotecaController {
 	@PostMapping("/registrarAutor")
 	public ResponseEntity<String> insertarAutor(@RequestBody Autor autor){
 		return bibliotecaService.registrarAutor(autor);
+	}
+	
+	@DeleteMapping("/eliminarAutor/{id}")
+	public ResponseEntity<String> insertarAutor(@PathVariable int id){
+		return bibliotecaService.eliminarAutor(id);
 	}
 	
 	@PostMapping("/registrarCliente")
@@ -87,5 +93,15 @@ public class BibliotecaController {
 		return bibliotecaService.prestamosCliente(idCliente);
 	}
 	
+	@GetMapping("listarClientes")
+	public ResponseEntity<?> listarClientes(){
+		return bibliotecaService.listarClientes();
+	}
+	
+	@PutMapping("actualizarEstado/{estado}/{idPrestamo}/{idLibro}")
+	public ResponseEntity<?>  actualizarEstado(@PathVariable int estado,@PathVariable int idPrestamos,@PathVariable int idLibro){
+		return bibliotecaService.actualizarEstado(estado,idPrestamos,idLibro);
+	}
+
 
 }

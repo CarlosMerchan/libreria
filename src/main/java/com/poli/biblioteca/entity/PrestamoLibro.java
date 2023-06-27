@@ -18,6 +18,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
@@ -35,14 +36,16 @@ public class PrestamoLibro  implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="ID_PRESTAMO")
 	private Integer idPrestamo;	
-	@JsonIgnore
-	@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY )
+	@JsonIgnoreProperties("prestamos")
+	@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.EAGER )
 	@JoinColumn(name="ID_CLIENTE")
 	private Cliente idCliente;
 	@Column(name="FECHA_PRESTAMO")
 	private LocalDate fechaPrestamo;
 	@Column(name="FECHA_DEVOLUCION")
 	private LocalDate fechaDevolucion;
+	@Column(name="ESTADO")
+	private String estado;
 	
      
 	
@@ -86,6 +89,19 @@ public class PrestamoLibro  implements Serializable {
 		this.fechaDevolucion = fechaDevolucion;
 	}
 
+	
+
+
+	public String getEstado() {
+		return estado;
+	}
+
+
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
 
 
 	public PrestamoLibro() {
@@ -95,19 +111,12 @@ public class PrestamoLibro  implements Serializable {
 
 	
 
-	public PrestamoLibro(Cliente idCliente, LocalDate fechaPrestamo, LocalDate fechaDevolucion) {
+	public PrestamoLibro(Cliente idCliente, LocalDate fechaPrestamo, LocalDate fechaDevolucion, String estado) {
 		super();
 		this.idCliente = idCliente;
 		this.fechaPrestamo = fechaPrestamo;
 		this.fechaDevolucion = fechaDevolucion;
-	}
-
-
-
-	@Override
-	public String toString() {
-		return "PrestamoLibro [idPrestamo=" + idPrestamo + ", idCliente=" + idCliente + ", fechaPrestamo="
-				+ fechaPrestamo + ", fechaDevolucion=" + fechaDevolucion + "]";
+		this.estado = estado;
 	}
 
 

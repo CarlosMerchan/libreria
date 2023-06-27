@@ -8,15 +8,15 @@ import com.poli.biblioteca.entity.Libro;
 public class Datos {
 
 	public static Optional<Libro> crearLibro1 (){
-		return Optional.of(new Libro("El retrato de dorian gray", "Gotico", "1890", 2));
+		return Optional.of(new Libro("El retrato de dorian gray", "Gotico", "1890", 2,""));
 	};
 	
 	public static Optional<Libro> crearLibro2(){
-		return Optional.of(new Libro("El diablo en la botella", "Ficcion", "1891", 0));
+		return Optional.of(new Libro("El diablo en la botella", "Ficcion", "1891", 0,""));
 	};
 	
 	public static Optional<Libro> crearLibro3(){
-		return Optional.of(new Libro("Masacre en las bananeras", "Narrativa", "1890", 5));
+		return Optional.of(new Libro("Masacre en las bananeras", "Narrativa", "1890", 5,""));
 	};
 	
 	

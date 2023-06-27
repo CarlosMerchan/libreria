@@ -48,6 +48,8 @@ public class Libro implements Serializable {
 	private String anoPublicacion;
 	@Column(name = "STOCK")
 	private Integer stock;
+	@Column(name="DESCRIPCION")
+	private String descripcion;
 
 	public Integer getIdLibro() {
 		return idLibro;
@@ -97,12 +99,22 @@ public class Libro implements Serializable {
 		this.stock = stock;
 	}
 
-	public Libro(String nombreLibro, String genero, String anoPublicacion, Integer stock) {
+	
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public Libro(String nombreLibro, String genero, String anoPublicacion, Integer stock,String descripcion) {
 		super();		
 		this.nombreLibro = nombreLibro;
 		this.genero = genero;
 		this.anoPublicacion = anoPublicacion;
 		this.stock = stock;
+		this.descripcion = descripcion;
 	}
 
 	public Libro() {
@@ -111,9 +123,11 @@ public class Libro implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Libro [idLibro=" + idLibro + ", nombreLibro=" + nombreLibro + ", genero=" + genero + ", anoPublicacion="
-				+ anoPublicacion + ", stock=" + stock + "]";
+		return "Libro [idLibro=" + idLibro + ", autor=" + autor + ", nombreLibro=" + nombreLibro + ", genero=" + genero
+				+ ", anoPublicacion=" + anoPublicacion + ", stock=" + stock + ", descripcion=" + descripcion + "]";
 	}
+
+	
 
 	
 
