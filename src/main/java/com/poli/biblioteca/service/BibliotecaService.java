@@ -217,7 +217,7 @@ public class BibliotecaService {
 
 	}
 	
-	public ResponseEntity<?> reponerStock(int idLibro,int stock){
+	public ResponseEntity<?> reponerStock(int stock,int idLibro){
 		try {
 				Libro libro = librosDao.findById(idLibro).orElse(null);
 				if(libro == null) {
@@ -233,7 +233,7 @@ public class BibliotecaService {
 		}
 	}
 
-	public ResponseEntity<?> actualizarEstado(int estado,int idPrestamo,int idLibro) {
+	public ResponseEntity<?> actualizarEstado(int estado,int idPrestamo) {
 		try {
 				PrestamoLibro prestamo = prestamoDao.findById(idPrestamo).orElse(null);
 				if(prestamo == null) {
@@ -243,10 +243,11 @@ public class BibliotecaService {
 					switch(estado) {
 					case 1:
 						prestamo.setEstado(ESTADO_ACPETADO);
+						prestamoDao.save(prestamo);
 						break;
 					case 2:
 						prestamo.setEstado(ESTADO_RECHAZADO);
-						eliminarPrestamo(idPrestamo, idLibro);
+						eliminarPrestamo(idPrestamo, prestamo.getIdLibro().getIdLibro());
 						break;
 					}
 					

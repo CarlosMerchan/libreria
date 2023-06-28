@@ -39,7 +39,11 @@ public class PrestamoLibro  implements Serializable {
 	@JsonIgnoreProperties("prestamos")
 	@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.EAGER )
 	@JoinColumn(name="ID_CLIENTE")
-	private Cliente idCliente;
+	private Cliente idCliente;	
+	@JsonIgnoreProperties("autor")
+	@OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.EAGER )
+	@JoinColumn(name="ID_LIBRO")
+	private Libro idLibro;
 	@Column(name="FECHA_PRESTAMO")
 	private LocalDate fechaPrestamo;
 	@Column(name="FECHA_DEVOLUCION")
@@ -102,6 +106,26 @@ public class PrestamoLibro  implements Serializable {
 		this.estado = estado;
 	}
 
+	
+	
+
+
+	public Libro getIdLibro() {
+		return idLibro;
+	}
+
+
+
+	public void setIdLibro(Libro idLibro) {
+		this.idLibro = idLibro;
+	}
+
+
+
+	public void setIdPrestamo(Integer idPrestamo) {
+		this.idPrestamo = idPrestamo;
+	}
+
 
 
 	public PrestamoLibro() {
@@ -111,35 +135,26 @@ public class PrestamoLibro  implements Serializable {
 
 	
 
-	public PrestamoLibro(Cliente idCliente, LocalDate fechaPrestamo, LocalDate fechaDevolucion, String estado) {
+	public PrestamoLibro(Libro idlibro,Cliente idCliente, LocalDate fechaPrestamo, LocalDate fechaDevolucion, String estado) {
 		super();
 		this.idCliente = idCliente;
 		this.fechaPrestamo = fechaPrestamo;
 		this.fechaDevolucion = fechaDevolucion;
 		this.estado = estado;
+		this.idLibro = idlibro;
 	}
 
 
 
 	@Override
-	public int hashCode() {
-		return Objects.hash(idCliente);
+	public String toString() {
+		return "PrestamoLibro [idLibro=" + idLibro + ", fechaPrestamo=" + fechaPrestamo + ", fechaDevolucion="
+				+ fechaDevolucion + ", estado=" + estado + "]";
 	}
 
 
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		PrestamoLibro other = (PrestamoLibro) obj;
-		return Objects.equals(idCliente, other.idCliente);
-	}
-
+	
 
 
 	

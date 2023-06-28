@@ -98,10 +98,14 @@ public class BibliotecaController {
 		return bibliotecaService.listarClientes();
 	}
 	
-	@PutMapping("actualizarEstado/{estado}/{idPrestamo}/{idLibro}")
-	public ResponseEntity<?>  actualizarEstado(@PathVariable int estado,@PathVariable int idPrestamos,@PathVariable int idLibro){
-		return bibliotecaService.actualizarEstado(estado,idPrestamos,idLibro);
+	@PutMapping("actualizarEstado/{estado}/{idPrestamo}")
+	public ResponseEntity<?>  actualizarEstado(@PathVariable int estado,@PathVariable int idPrestamo){
+		return bibliotecaService.actualizarEstado(estado,idPrestamo);
 	}
 
+	@PutMapping("reponerStock/{stock}/{idLibro}")
+	public ResponseEntity<?>  reponerStock(@PathVariable int stock,@PathVariable int idLibro){
+		return bibliotecaService.reponerStock(stock,idLibro);
+	}
 
 }
